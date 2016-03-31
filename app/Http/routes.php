@@ -11,6 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+    'as'   => 'content.index',
+    'uses' => 'ContentSearchController@index'
+]);
+Route::post('filter', [
+    'as'   => 'content.filter',
+    'uses' => 'ContentSearchController@filter'
+]);
+Route::get('cloud', [
+    'as'   => 'content.cloudvision',
+    'uses' => 'SubredditController@cloudVision'
+]);
+Route::get('cloud-single', [
+    'as'   => 'content.single-cloudvision',
+    'uses' => 'ContentSearchController@single'
+]);
