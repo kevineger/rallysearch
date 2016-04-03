@@ -13,17 +13,17 @@
 
 Route::get('/', [
     'as'   => 'content.index',
-    'uses' => 'ContentSearchController@index'
+    'uses' => 'AnnotationController@index'
 ]);
 Route::post('filter', [
     'as'   => 'content.filter',
-    'uses' => 'ContentSearchController@filter'
+    'uses' => 'AnnotationController@filter'
 ]);
 Route::get('cloud', [
     'as'   => 'content.cloudvision',
-    'uses' => 'SubredditController@cloudVision'
+    'uses' => 'AnnotationController@cloudVision'
 ]);
 Route::get('cloud-single', [
     'as'   => 'content.single-cloudvision',
-    'uses' => 'ContentSearchController@single'
+    'uses' => 'AnnotationController@single'
 ]);
