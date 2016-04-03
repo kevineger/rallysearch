@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\AnnotateTopPosts;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Annotation;
@@ -48,6 +49,16 @@ class AnnotationController extends Controller {
         }
 
         return View::make('content-search.annotation-cards', ['annotations' => $annotations]);
+    }
+
+    /**
+     * NOTE: For testing purposes only.
+     *
+     * Manually trigger annotation job.
+     */
+    public function cloudVision()
+    {
+        $this->dispatch(new AnnotateTopPosts);
     }
 
     /**

@@ -1,3 +1,4 @@
+/resources/views/content-search/index.blade.php
 /vendor
 /node_modules
 Homestead.yaml
