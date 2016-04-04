@@ -22,21 +22,22 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {{-------------------------------------------------------------------------}}
 
-    {{---Fonts-----------------------------------------------------------------}}
-    {{--<link href='http://fonts.googleapis.com/css?family=Crimson+Text:600,400' rel='stylesheet' type='text/css'>--}}
-    {{--<link href='http://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>--}}
-    {{-------------------------------------------------------------------------}}
-
     @yield('head')
 
 </head>
 <body>
 
-@include('navbar')
-
-<div class="ui container" style="padding-top: 100px;">
-    @yield('content')
+<div class="ui grid">
+    <div class="two wide column">
+        @include('navbar')
+    </div>
+    <div class="fourteen wide column">
+        <div class="ui container" style="padding-top: 100px;">
+            @yield('content')
+        </div>
+    </div>
 </div>
+
 
 {{--Semantic JS--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js"></script>
