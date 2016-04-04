@@ -19,6 +19,10 @@ Route::post('filter', [
     'as'   => 'content.filter',
     'uses' => 'AnnotationController@filter'
 ]);
+Route::get('about', [
+    'as'   => 'about',
+    'uses' => 'PagesController@about'
+]);
 Route::get('cloud', [
     'as'   => 'content.cloudvision',
     'uses' => 'AnnotationController@cloudVision'

@@ -5,7 +5,7 @@
     <a href="{{ url('/') }}" class="item">
         <i class="icon search"></i> Content Search
     </a>
-    <a href="{{ url('/about') }}" class="item">
+    <a href="{{ url('about') }}" class="item">
         <i class="icon idea"></i> About
     </a>
     <a href="{{ url('https://github.com/kevineger/rallysearch') }}" class="item">
