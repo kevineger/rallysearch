@@ -38,7 +38,6 @@
     </div>
 </div>
 
-
 {{--Semantic JS--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js"></script>
 
