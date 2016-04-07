@@ -33,12 +33,12 @@ class AnnotateTopPosts extends Job implements ShouldQueue {
 
     /**
      * Create a new job instance.
-     *
+     * @param Google_Client $client
      */
-    public function __construct()
+    public function __construct(Google_Client $client)
     {
         // Create the cloud service vision client
-        $this->google_client = new Google_Client();
+        $this->google_client = $client;
         $this->google_client->useApplicationDefaultCredentials();
         $this->google_client->addScope(Google_Service_Appengine::CLOUD_PLATFORM);
 
