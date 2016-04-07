@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\AnnotateTopPosts;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -26,5 +27,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->call(function () {
+            dispatch(new AnnotateTopPosts);
+        })->everyMinute();
     }
 }
