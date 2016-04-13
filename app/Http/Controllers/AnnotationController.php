@@ -20,7 +20,7 @@ class AnnotationController extends Controller {
      */
     public function index()
     {
-        $annotations = Annotation::all();
+        $annotations = Annotation::paginate(20);
 
         $labels = Label::lists('description', 'id');
 

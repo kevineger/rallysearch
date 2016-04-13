@@ -31,6 +31,8 @@
         </div>
     </div>
 
+    {!! $annotations->links() !!}
+
 @endsection
 
 @section('footer')
