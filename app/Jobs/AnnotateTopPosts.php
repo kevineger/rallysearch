@@ -52,8 +52,21 @@ class AnnotateTopPosts extends Job implements ShouldQueue {
      */
     public function handle()
     {
-        // Get the most recent X posts, for now using the default 25
-        $annotations = $this->getUnseenListings($this->phpRaw->getHot());
+        // Collect all annotations to label
+        $annotations = new Collection();
+        // Get the hottest 100 posts
+        $hot_annotations = $this->getUnseenListings($this->phpRaw->getHot(null, 100));
+        // Get the top posts from today, this week, this month, this year and of all time
+        $top_annotations = $this->getUnseenListings($this->phpRaw->getTop(null, 'day', 100))
+            ->merge($this->getUnseenListings($this->phpRaw->getTop(null, 'week', 100)) ?: collect())
+            ->merge($this->getUnseenListings($this->phpRaw->getTop(null, 'month', 100)) ?: collect())
+            ->merge($this->getUnseenListings($this->phpRaw->getTop(null, 'year', 100)) ?: collect())
+            ->merge($this->getUnseenListings($this->phpRaw->getTop(null, 'all', 100)) ?: collect());
+
+        // Merge all hot and top annotations
+        $annotations = $annotations->merge($hot_annotations ?: collect())->merge($top_annotations ?: collect());
+
+        // Label the collection
         $this->labelCollection($annotations);
     }
 
@@ -67,14 +80,16 @@ class AnnotateTopPosts extends Job implements ShouldQueue {
     {
         $annotations = new Collection();
 
-        foreach ( $submissions->children as $submission ) {
+        foreach ($submissions->children as $submission)
+        {
             // Check if submission has already been annotated.
             $annotation = Annotation::findByRedditId($submission->data->id);
             // If submission is a text submission or the post has already been annotated, skip.
-            if ( $submission->data->is_self || $annotation ) continue;
+            if ($submission->data->is_self || $annotation) continue;
 
             // Create a new annotation after verifying it has a preview
-            if ( isset($submission->data->preview) ) {
+            if (isset($submission->data->preview))
+            {
                 $annotation = Annotation::create([
                     'reddit_id'    => $submission->data->id,
                     'post_url'     => 'http://reddit.com' . $submission->data->permalink,
@@ -101,10 +116,12 @@ class AnnotateTopPosts extends Job implements ShouldQueue {
         $feature->setType('LABEL_DETECTION');
         $feature->setMaxResults(10);
         // Each request to Cloud Vision can have at most 12 images
-        foreach ( $annotations->chunk(12) as $k => $annotations_chunk ) {
+        foreach ($annotations->chunk(12) as $k => $annotations_chunk)
+        {
             $batch_request = new Google_Service_Vision_BatchAnnotateImagesRequest();
             $requests = [];
-            foreach ( $annotations_chunk as $annotation ) {
+            foreach ($annotations_chunk as $annotation)
+            {
                 $request = new Google_Service_Vision_AnnotateImageRequest();
                 $image_data = base64_encode(file_get_contents($annotation->image_url));
                 // Set the image for the request
@@ -119,13 +136,15 @@ class AnnotateTopPosts extends Job implements ShouldQueue {
 
             // Handle the response by labeling each image
             $batch_responses = $response->getResponses();
-            foreach ( $batch_responses as $key => $res ) {
+            foreach ($batch_responses as $key => $res)
+            {
                 // Set a label for easy entity annotation
                 // The annotation index is the chunk number * chunk size + current index in response.
                 $current_annotation = $annotations[$k * 12 + $key];
                 $this->labelImage($current_annotation, $res->getLabelAnnotations());
                 // If CloudVision was unable to label this image, delete the annotation.
-                if ( $current_annotation->labels->count() < 1 ) {
+                if ($current_annotation->labels->count() < 1)
+                {
                     error_log("Deleteing annotation $current_annotation->post_url");
                     $current_annotation->delete();
                 }
@@ -141,10 +160,11 @@ class AnnotateTopPosts extends Job implements ShouldQueue {
      */
     private function labelImage(Annotation $annotation, $labels)
     {
-        foreach ( $labels as $label ) {
+        foreach ($labels as $label)
+        {
             // TODO: Store score in pivot table. Is it necessary? Come back.
             // Only include labels that have a 70% or creater confidence score
-            if ( $label->score >= 0.70 )
+            if ($label->score >= 0.70)
                 $annotation->labels()->attach(Label::firstOrCreate([
                     'description' => $label->description,
                     'mid'         => $label->mid
