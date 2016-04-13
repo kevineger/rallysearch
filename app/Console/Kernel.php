@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel {
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('annotate:top')->everyMinute();
+        $schedule->command('annotate:top')->twiceDaily();
 //        $schedule->call(function ()
 //        {
 //            error_log("Hitting cloud url");

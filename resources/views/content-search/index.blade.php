@@ -31,7 +31,13 @@
         </div>
     </div>
 
-    {!! $annotations->links() !!}
+    {{--{!! $annotations->links() !!}--}}
+    <br>
+    <div class="ui one column centered grid">
+        <div class="middle aligned column">
+            {!! (new Landish\Pagination\SemanticUI($annotations))->render() !!}
+        </div>
+    </div>
 
 @endsection
 
