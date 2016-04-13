@@ -18,7 +18,7 @@ class AnnotateTop extends Command {
      *
      * @var string
      */
-    protected $description = 'Annotate the top 25 posts on Reddit front page.';
+    protected $description = 'Annotate the top 25 posts on Reddit front page';
 
     /**
      * Create a new command instance.

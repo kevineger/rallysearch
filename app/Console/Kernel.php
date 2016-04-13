@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel {
      */
     protected $commands = [
         // Commands\Inspire::class,
+        Commands\AnnotateTop::class,
     ];
 
     /**
@@ -27,8 +28,10 @@ class Kernel extends ConsoleKernel {
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            $this->dispatch(new AnnotateTopPosts());
-        })->everyMinute();
+//        $schedule->command('annotate:top')->everyMinute();
+        $schedule->call(function ()
+        {
+            error_log("Hitting cloud url");
+        })->everyMinute()->thenPing(url('cloud'));
     }
 }
