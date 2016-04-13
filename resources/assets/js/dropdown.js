@@ -52,5 +52,5 @@ $(document.body).on('click', '.ui.labeled.similar.button', function () {
 
 // Show content with clicked label
 $(document.body).on('click', '.ui.label', function () {
-    $('.ui.dropdown').dropdown('set exactly', $(this).text());
+    $('.ui.dropdown').dropdown('set selected', $(this).text());
 });
