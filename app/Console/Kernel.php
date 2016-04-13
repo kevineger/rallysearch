@@ -27,9 +27,8 @@ class Kernel extends ConsoleKernel {
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function ()
-        {
-            $this->dispatch(new AnnotateTopPosts(new \Google_Client()));
+        $schedule->call(function () {
+            $this->dispatch(new AnnotateTopPosts());
         })->everyMinute();
     }
 }
