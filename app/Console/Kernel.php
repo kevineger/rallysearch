@@ -28,10 +28,10 @@ class Kernel extends ConsoleKernel {
      */
     protected function schedule(Schedule $schedule)
     {
-//        $schedule->command('annotate:top')->everyMinute();
-        $schedule->call(function ()
-        {
-            error_log("Hitting cloud url");
-        })->everyMinute()->thenPing(url('cloud'));
+        $schedule->command('annotate:top')->everyMinute();
+//        $schedule->call(function ()
+//        {
+//            error_log("Hitting cloud url");
+//        })->everyMinute()->thenPing(url('cloud'));
     }
 }
