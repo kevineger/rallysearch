@@ -7,8 +7,6 @@
 @section('content')
     @include('page-header')
 
-
-
     <div class="ui grid">
         <div class="fourteen wide column">
             <select name="labels" class="ui fluid search dropdown" multiple="">
@@ -23,20 +21,8 @@
     </div>
 
     <br>
-
-    <div class="ui blurring">
-        <div class="ui inverted dimmer"></div>
-        <div id="annotation-content">
-            @include('content-search.annotation-cards')
-        </div>
-    </div>
-
-    {{--{!! $annotations->links() !!}--}}
-    <br>
-    <div class="ui one column centered grid">
-        <div class="middle aligned column">
-            {!! (new Landish\Pagination\SemanticUI($annotations))->render() !!}
-        </div>
+    <div id="annotation-content">
+        @include('content-search.annotation-cards')
     </div>
 
 @endsection

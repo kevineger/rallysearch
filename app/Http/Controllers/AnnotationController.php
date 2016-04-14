@@ -16,18 +16,27 @@ class AnnotationController extends Controller {
     /**
      * Display a collection of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $annotations = Annotation::paginate(20);
+        $active_labels = $request->get('active_labels');
+        $annotations = $this->getFilteredAnnotations($active_labels);
+        error_log("(Index) Active labels:");
+        if ($active_labels)
+            foreach ($active_labels as $key => $alab)
+            {
+                error_log("Label " . $key . ": " . $alab);
+            }
 
         $labels = Label::lists('description', 'id');
 
         return response()->view('content-search.index', [
-            'tagline'     => 'Browse Reddit by it\'s content',
-            'annotations' => $annotations,
-            'labels'      => $labels
+            'tagline'       => 'Browse Reddit by it\'s content',
+            'annotations'   => $annotations,
+            'labels'        => $labels,
+            'active_labels' => $active_labels
         ]);
     }
 
@@ -39,16 +48,41 @@ class AnnotationController extends Controller {
      */
     public function filter(Request $request)
     {
-        // If empty dropdown label
-        if ( !$request->get('labels') )
-            $annotations = Annotation::all();
-        else {
-            $annotations = Annotation::whereHas('labels', function ($query) use ($request) {
-                $query->whereIn('description', $request->get('labels'));
-            })->get();
+        $active_labels = $request->get('active_labels');
+        $annotations = $this->getFilteredAnnotations($active_labels);
+
+        error_log("(Filter) Active labels:");
+        if ($active_labels)
+            foreach ($active_labels as $alab)
+            {
+                error_log($alab);
+            }
+
+        return View::make('content-search.annotation-cards', [
+            'annotations'   => $annotations,
+            'active_labels' => $active_labels
+        ]);
+    }
+
+    /**
+     * Helper function to index and filter to get the annotations.
+     *
+     * @param $labels
+     * @return mixed
+     */
+    public function getFilteredAnnotations($labels)
+    {
+        if (!$labels)
+            $annotations = Annotation::paginate(20);
+        else
+        {
+            $annotations = Annotation::whereHas('labels', function ($query) use ($labels)
+            {
+                $query->whereIn('description', $labels);
+            })->paginate(20);
         }
 
-        return View::make('content-search.annotation-cards', ['annotations' => $annotations]);
+        return $annotations;
     }
 
     /**

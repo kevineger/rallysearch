@@ -1,6 +1,41 @@
 $('.special.cards .card .image').dimmer({
     on: 'hover'
 });
+
+// On pagination click, trigger ajax request to update
+$(document).on('click', '.pagination a', function (e) {
+    e.preventDefault();
+    var page = $(this).attr('href').split('page=')[1];
+    getAnnotations(page);
+});
+
+// Return annotations for a specific page
+function getAnnotations(page) {
+    var label_values = $('.ui.dropdown').dropdown('get value');
+    // Dim the existing content
+    $('.ui.dimmer').dimmer('show');
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'GET',
+        url: '/ajax/filter?page=' + page,
+        data: {
+            active_labels: label_values
+        },
+        success: function (markup) {
+            // Scroll to the top
+            window.scrollTo(0, 0);
+            $('#annotation-content').html(markup);
+            // Undim the content
+            $('.ui.dimmer').dimmer('hide');
+            $('.special.cards .card .image').dimmer({
+                on: 'hover'
+            });
+        }
+    });
+}
+
 $('.ui.dropdown').dropdown({
     allowAdditions: false,
     onChange: function (value, text, $selectedItem) {
@@ -10,10 +45,10 @@ $('.ui.dropdown').dropdown({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            type: 'POST',
-            url: '/filter',
+            type: 'GET',
+            url: '/ajax/filter',
             data: {
-                labels: value
+                active_labels: value
             },
             success: function (markup) {
                 $('#annotation-content').html(markup);

@@ -15,7 +15,7 @@ Route::get('/', [
     'as'   => 'content.index',
     'uses' => 'AnnotationController@index'
 ]);
-Route::post('filter', [
+Route::get('ajax/filter', [
     'as'   => 'content.filter',
     'uses' => 'AnnotationController@filter'
 ]);
