@@ -13,7 +13,7 @@ $(document).on('click', '.pagination a', function (e) {
 function getAnnotations(page) {
     var label_values = $('.ui.dropdown').dropdown('get value');
     // Dim the existing content
-    $('.ui.dimmer').dimmer('show');
+    $('.ui.card-dimmer.dimmer').dimmer('show');
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -28,7 +28,7 @@ function getAnnotations(page) {
             window.scrollTo(0, 0);
             $('#annotation-content').html(markup);
             // Undim the content
-            $('.ui.dimmer').dimmer('hide');
+            $('.ui.card-dimmer.dimmer').dimmer('hide');
             $('.special.cards .card .image').dimmer({
                 on: 'hover'
             });
@@ -40,7 +40,7 @@ $('.ui.dropdown').dropdown({
     allowAdditions: false,
     onChange: function (value, text, $selectedItem) {
         // Dim the existing content
-        $('.ui.dimmer').dimmer('show');
+        $('.ui.card-dimmer.dimmer').dimmer('show');
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -53,7 +53,7 @@ $('.ui.dropdown').dropdown({
             success: function (markup) {
                 $('#annotation-content').html(markup);
                 // Undim the content
-                $('.ui.dimmer').dimmer('hide');
+                $('.ui.card-dimmer.dimmer').dimmer('hide');
                 $('.special.cards .card .image').dimmer({
                     on: 'hover'
                 });

@@ -1,5 +1,5 @@
 <div class="ui blurring">
-    <div class="ui inverted dimmer">
+    <div class="ui inverted card-dimmer dimmer">
         <div class="ui large text loader">Loading</div>
     </div>
     <div class="ui four doubling stackable special cards">
