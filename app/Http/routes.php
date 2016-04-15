@@ -23,11 +23,11 @@ Route::get('about', [
     'as'   => 'about',
     'uses' => 'PagesController@about'
 ]);
-Route::get('cloud', [
+/*Route::get('cloud', [
     'as'   => 'content.cloudvision',
     'uses' => 'AnnotationController@cloudVision'
 ]);
 Route::get('cloud-single', [
     'as'   => 'content.single-cloudvision',
     'uses' => 'AnnotationController@single'
-]);
+]);*/

@@ -1,4 +1,8 @@
-<div class="ui left fixed vertical labeled icon menu">
+<div class="ui black huge launch right attached button" style="width: 70px;">
+    <i class="icon list layout"></i>
+    <span class="text" style="display: none;">Menu</span>
+</div>
+<div class="ui sidebar vertical labeled icon menu">
     <div class="item">
         <img class="ui small image" src="https://c1.staticflickr.com/3/2513/3843936388_24dcbdd47a_m.jpg">
     </div>

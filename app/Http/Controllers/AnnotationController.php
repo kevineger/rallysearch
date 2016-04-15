@@ -107,7 +107,7 @@ class AnnotationController extends Controller {
         $client = new \Google_Client();
         $client->useApplicationDefaultCredentials();
         $client->addScope(\Google_Service_Appengine::CLOUD_PLATFORM);
-        $im = file_get_contents('https://i.redditmedia.com/GYofTRVZe5Ay0d8iW7UnCoMt0K_gor71oedLNWnOB3Y.jpg?s=d87a29eb089e183e75a906e2719c0ff8');
+        $im = file_get_contents('https://i.redditmedia.com/cuQfn5rS__ZByvt9Wyh2_MTVIt32OSpSDCcZc-veNq0.jpg?s=a61c09e590ee03ae88d2dd85ece25b95');
         $imdata = base64_encode($im);
         // Create the cloud service vision object
         $visionService = new \Google_Service_Vision($client);

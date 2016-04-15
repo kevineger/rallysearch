@@ -14,4 +14,15 @@
   transform: translateY(-50%);
   width: 100%; }
 
+.right.attached.button {
+  position: fixed;
+  top: 63px;
+  z-index: 500;
+  text-transform: uppercase;
+  line-height: 1;
+  font-weight: 700; }
+
+.ui.pagination.menu {
+  margin: 30px 0 40px; }
+
 /*# sourceMappingURL=app.css.map */
