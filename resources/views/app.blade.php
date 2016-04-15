@@ -24,24 +24,54 @@
 
     @yield('head')
 
+    {{--Google Analytics--}}
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-76466330-1', 'auto');
+        ga('send', 'pageview');
+    </script>
 </head>
 <body>
 
-<div class="ui grid">
-    <div class="two wide column">
-        @include('navbar')
-    </div>
-    <div class="fourteen wide column">
-        <div class="ui container" style="padding-top: 100px;">
-            @yield('content')
-        </div>
-    </div>
+@include('navbar')
+<div class="ui container" style="padding-top: 100px;">
+    @yield('content')
 </div>
+
+{{--<div class="ui container" style="padding-top: 100px;">--}}
+{{--@yield('content')--}}
+{{--</div>--}}
 
 {{--Semantic JS--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js"></script>
 
 @yield('footer')
+
+<script>
+    // Sidebar toggle
+    $('.sidebar').first().sidebar('attach events', '.launch.button');
+    $('.launch.button').removeClass('disabled')
+            .mouseenter(function () {
+                $(this).stop().animate({width: '140px'}, 300,
+                        function () {
+                            $(this).find('.text').show();
+                        });
+            }).mouseleave(function (event) {
+        $(this).find('.text').hide();
+        $(this).stop().animate({width: '70px'}, 300);
+    });
+</script>
 
 </body>
 </html>
