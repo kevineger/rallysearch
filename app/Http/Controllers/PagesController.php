@@ -15,6 +15,8 @@ class PagesController extends Controller {
      */
     public function about()
     {
-        return response()->view('about');
+        return response()->view('about', [
+            'tagline' => 'What is RallySearch?',
+        ]);
     }
 }

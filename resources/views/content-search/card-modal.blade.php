@@ -7,7 +7,7 @@
         <div class="ui medium image">
             <img src="{{ $annotation->image_url }}">
         </div>
-        <div class="description">
+        <div style="width:100%" class="description">
             <div class="ui header">{{ $annotation->reddit_title }}</div>
             <div class="ui lightgrey labels">
                 @foreach($annotation->labels as $label)
@@ -16,6 +16,9 @@
                     </a>
                 @endforeach
             </div>
+            <span class="modal-time">
+                Added {{ $annotation->created_at->diffForHumans() }}
+            </span>
         </div>
     </div>
     <div class="actions">

@@ -25,4 +25,13 @@
 .ui.pagination.menu {
   margin: 30px 0 40px; }
 
+.image.content .description {
+  position: relative; }
+
+.description .modal-time {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: #5A5A5A; }
+
 /*# sourceMappingURL=app.css.map */
