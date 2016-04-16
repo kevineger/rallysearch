@@ -4,7 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>rally</title>
+    <title>RallySearch</title>
+    <meta name="title" content="RallySearch"/>
+    <meta name="description" content="An alternative way of browsing Reddit"/>
+    <link rel="image_src" href="/images/logo.jpg"/>
+    <meta property="og:url" content="http://www.rallysearch.xyz"/>
+    <meta property="og:title" content="RallySearch"/>
+    <meta property="og:description" content="An alternative way of browsing Reddit"/>
+    <meta property="og:image" content="http://www.rallysearch.xyz/images/logo.jpg"/>
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
