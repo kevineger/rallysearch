@@ -23,7 +23,6 @@ class AnnotationController extends Controller {
     {
         $active_labels = $request->get('active_labels');
         $annotations = $this->getFilteredAnnotations($active_labels);
-        error_log("(Index) Active labels:");
         if ($active_labels)
             foreach ($active_labels as $key => $alab)
             {
@@ -50,8 +49,6 @@ class AnnotationController extends Controller {
     {
         $active_labels = $request->get('active_labels');
         $annotations = $this->getFilteredAnnotations($active_labels);
-
-        error_log("(Filter) Active labels:");
         if ($active_labels)
             foreach ($active_labels as $alab)
             {
@@ -73,13 +70,13 @@ class AnnotationController extends Controller {
     public function getFilteredAnnotations($labels)
     {
         if (!$labels)
-            $annotations = Annotation::paginate(20);
+            $annotations = Annotation::orderBy('created_at', 'desc')->paginate(20);
         else
         {
             $annotations = Annotation::whereHas('labels', function ($query) use ($labels)
             {
                 $query->whereIn('description', $labels);
-            })->paginate(20);
+            })->orderBy('created_at', 'desc')->paginate(20);
         }
 
         return $annotations;

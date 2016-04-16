@@ -9,7 +9,7 @@
         </div>
         <div style="width:100%" class="description">
             <div class="ui header">{{ $annotation->reddit_title }}</div>
-            <div class="ui lightgrey labels">
+            <div class="ui tag labels">
                 @foreach($annotation->labels as $label)
                     <a class="ui label">
                         {{ $label->description }}

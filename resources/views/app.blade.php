@@ -45,8 +45,15 @@
 <body>
 
 @include('navbar')
-<div class="ui container" style="padding-top: 100px;">
-    @yield('content')
+
+<div class="pusher">
+    <div class="ui black huge launch right attached button" style="width: 70px;">
+        <i class="icon list layout"></i>
+        <span class="text" style="display: none;">Menu</span>
+    </div>
+    <div class="ui container" style="padding-top: 100px;">
+        @yield('content')
+    </div>
 </div>
 
 {{--<div class="ui container" style="padding-top: 100px;">--}}
