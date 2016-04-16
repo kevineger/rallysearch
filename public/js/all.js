@@ -51,6 +51,8 @@ $('.ui.dropdown').dropdown({
                 active_labels: value
             },
             success: function (markup) {
+                // Scroll to the top
+                window.scrollTo(0, 0);
                 $('#annotation-content').html(markup);
                 // Undim the content
                 $('.ui.card-dimmer.dimmer').dimmer('hide');
@@ -76,6 +78,8 @@ $(document.body).on('click', '.ui.labeled.expand.button', function () {
 
 // View similarly labeled content
 $(document.body).on('click', '.ui.labeled.similar.button', function () {
+    // Scroll to the top
+    window.scrollTo(0, 0);
     var content = $(this).parent().siblings('.content').find('.ui.labels');
     var label_list = [];
     content.children('.label').each(function () {
@@ -87,6 +91,8 @@ $(document.body).on('click', '.ui.labeled.similar.button', function () {
 
 // Show content with clicked label
 $(document.body).on('click', '.ui.label', function () {
+    // Scroll to the top
+    window.scrollTo(0, 0);
     $('.ui.dropdown').dropdown('set selected', $(this).text());
 });
 //# sourceMappingURL=all.js.map
