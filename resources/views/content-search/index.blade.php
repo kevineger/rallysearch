@@ -7,7 +7,7 @@
 @section('content')
     @include('page-header')
 
-    <div class="ui grid">
+    <div class="ui stackable grid">
         <div class="fourteen wide column">
             <select name="labels" class="ui fluid search dropdown" multiple="">
                 @foreach($labels as $label)
