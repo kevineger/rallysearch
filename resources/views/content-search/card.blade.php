@@ -15,14 +15,10 @@
         </div>
     </div>
     <div class="content">
-        <a class="header">{{ $annotation->reddit_id }}</a>
+        <a href="{{ $annotation->post_url }}" class="slim header">{{ str_limit($annotation->reddit_title, $limit=50, $end='...') }}</a>
         <div class="meta">
-            <span>/r/{{ $annotation->reddit_sub }}</span>
+            <span>/r/{{ $annotation->reddit_sub }} - {{ $annotation->reddit_id }}</span>
         </div>
-        <div class="description fade">
-            {{ $annotation->reddit_title }}
-        </div>
-        <br>
         <div class="description">
             <div id="labels{{ $annotation->id }}" class="ui lightgrey labels">
                 @foreach($annotation->labels as $label)

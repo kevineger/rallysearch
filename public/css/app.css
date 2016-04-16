@@ -34,4 +34,7 @@
   right: 0;
   color: #5A5A5A; }
 
+.ui.cards > .ui.card > .content > .slim.header {
+  font-weight: 500; }
+
 /*# sourceMappingURL=app.css.map */
